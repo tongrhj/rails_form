@@ -2,6 +2,9 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
+    post :create, user: { email: 'user@test.com', 
+                          name: 'usertest',
+                          password: 'passwordtest' }
     @user = users(:one)
   end
 
