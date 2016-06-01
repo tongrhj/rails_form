@@ -2,12 +2,11 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: "Test User", email: "test@email.com",
-                     password: "password", password_confirmation: "password")
+    @user = users(:one)
   end
 
   test "User should be valid" do
-    assert @user.valid?
+    assert @user.valid?, "User should be valid but isn't"
   end
 
   test "name should not be blank" do
@@ -37,7 +36,7 @@ class UserTest < ActiveSupport::TestCase
     @invalid_emails = %w[jxlqk2342_at_gmail.com A-Us-Er@example,jp first.example@b_ai.cn length+last@foo+bar.org]
     @invalid_emails.each do |invalid_email|
       @user_email = invalid_email
-      assert @user.valid?, "#{invalid_email.inspect} should be valid"
+      assert_not @user.valid?, "#{invalid_email.inspect} should not be valid"
     end
   end
 
